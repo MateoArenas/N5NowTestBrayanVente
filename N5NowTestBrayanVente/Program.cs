@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using N5NowTestBrayanVente.Domain.Aggregates.RepositoriesAggregate.Interfaces;
 using N5NowTestBrayanVente.Infrastructure.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:DefaultConnection");
 builder.Services.AddDbContext<N5NowTestDBContext>(x => x.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 

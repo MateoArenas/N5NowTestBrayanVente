@@ -4,42 +4,41 @@ using N5NowTestBrayanVente.Infrastructure.Contexts;
 
 namespace N5NowTestBrayanVente.Infrastructure.Repositories
 {
-    public class GeneralRepository : IGeneralRepository
+    public class GeneralRepository<T> : IGeneralRepository<T> where T : class
     {
         private readonly N5NowTestDBContext _n5NowTestDBContext;
-
+        private readonly DbSet<T> _dbSet;
         public GeneralRepository(N5NowTestDBContext n5NowTestDBContext)
         {
             _n5NowTestDBContext = n5NowTestDBContext;
+            _dbSet = _n5NowTestDBContext.Set<T>();
         }
 
-        public async Task<List<T>> GetAllAsync<T>() where T : class
+        public async Task<List<T>> GetAllAsync()
         {
-            return await _n5NowTestDBContext.Set<T>().ToListAsync();
+            return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetAsync<T>(int Id) where T : class
+        public async Task<T> GetAsync(int Id)
         {
-            return await _n5NowTestDBContext.Set<T>().FindAsync(Id);
+            return await _dbSet.FindAsync(Id);
         }
 
-        public async Task<T> InsertAsync<T>(T entity) where T : class
+        public async Task<T> InsertAsync(T entity)
         {
-            var entityResult = await _n5NowTestDBContext.AddAsync<T>(entity);
-            await _n5NowTestDBContext.SaveChangesAsync();
+            var entityResult = await _dbSet.AddAsync(entity);
 
             return entityResult.Entity;
         }
 
-        public async Task<T> UpdateAsync<T>(int Id, T entity) where T : class
+        public async Task<T> UpdateAsync(int Id, T entity)
         {
-            var findEntity = await _n5NowTestDBContext.Set<T>().FindAsync(Id);
+            var findEntity = await _dbSet.FindAsync(Id);
 
             if (findEntity == null)
                 return null;
 
-            var entityResult = _n5NowTestDBContext.Set<T>().Update(entity);
-            await _n5NowTestDBContext.SaveChangesAsync();
+            var entityResult = _dbSet.Update(entity);
 
             return entityResult.Entity;
         }

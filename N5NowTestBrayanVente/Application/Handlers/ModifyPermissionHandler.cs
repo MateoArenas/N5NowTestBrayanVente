@@ -41,7 +41,7 @@ namespace N5NowTestBrayanVente.Application.Handlers
                 {
                     NombreEmpleado = permissionResult.NombreEmpleado,
                     ApellidoEmpleado = permissions.ApellidoEmpleado,
-                    TipoPermiso = permissionResult.PermissionType.Descripcion,
+                    TipoPermiso = permissionResult.TipoPermiso,
                     FechaPermiso = permissions.FechaPermiso,
                 };
             }

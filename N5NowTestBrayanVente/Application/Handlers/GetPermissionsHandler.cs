@@ -32,7 +32,7 @@ namespace N5NowTestBrayanVente.Application.Handlers
                 {
                     NombreEmpleado = permission.NombreEmpleado,
                     ApellidoEmpleado = permission.ApellidoEmpleado,
-                    TipoPermiso = permission.PermissionType.Descripcion,
+                    TipoPermiso = permission.TipoPermiso,
                     FechaPermiso = permission.FechaPermiso,
                 };
             }

@@ -32,7 +32,11 @@ namespace N5NowTestBrayanVente.Controllers
         public async Task<ActionResult<PermissionsResultDTO>> Create(RequestPermissionCommand requestPermissionCommand)
         {
             PermissionsResultDTO permissionsResultDTO = await _mediator.Send(requestPermissionCommand);
-            
+            if (permissionsResultDTO == null)
+            {
+                return NotFound();
+            }
+
             return permissionsResultDTO;
         }
 

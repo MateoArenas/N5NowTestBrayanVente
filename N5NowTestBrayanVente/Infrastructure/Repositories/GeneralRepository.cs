@@ -32,9 +32,9 @@ namespace N5NowTestBrayanVente.Infrastructure.Repositories
             if (findEntity == null)
                 return null;
 
-            var entityResult = _dbSet.Update(entity);
+            _n5NowTestDBContext.Entry(findEntity).CurrentValues.SetValues(entity);
 
-            return entityResult.Entity;
+            return entity;
         }
     }
 }

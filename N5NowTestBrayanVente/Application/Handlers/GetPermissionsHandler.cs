@@ -23,7 +23,7 @@ namespace N5NowTestBrayanVente.Application.Handlers
             {
                 await _kafkaProducer.ProduceKafkaMessage(KafkaMessageEnum.Get);
 
-                Permissions permission = await _unitOfWork.GeneralRepository<Permissions>().GetAsync(request.Id);
+                Permissions? permission = await _unitOfWork.GeneralRepository<Permissions>().GetAsync(request.Id);
 
                 if (permission == null)
                     return null;

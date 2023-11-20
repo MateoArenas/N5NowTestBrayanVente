@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "N5NowTestBrayanVente", "N5NowTestBrayanVente\N5NowTestBrayanVente.csproj", "{9ED83F1F-276A-4609-8A57-8E4F9AD363A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{4714C667-3250-4AD7-9640-11D3F5D417E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5NowTestBrayanVente.Test", "N5NowTestBrayanVente.Test\N5NowTestBrayanVente.Test.csproj", "{4C43F292-18BD-4E06-A172-55089215A257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{9ED83F1F-276A-4609-8A57-8E4F9AD363A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ED83F1F-276A-4609-8A57-8E4F9AD363A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ED83F1F-276A-4609-8A57-8E4F9AD363A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C43F292-18BD-4E06-A172-55089215A257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C43F292-18BD-4E06-A172-55089215A257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C43F292-18BD-4E06-A172-55089215A257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C43F292-18BD-4E06-A172-55089215A257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C43F292-18BD-4E06-A172-55089215A257} = {4714C667-3250-4AD7-9640-11D3F5D417E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {422DDAD2-15A0-4DD2-A038-84B99A690925}

@@ -33,8 +33,10 @@ namespace N5NowTestBrayanVente.Application.Handlers
                     FechaPermiso = request.permisionRequestDTO.FechaPermiso,
                 };
 
-                Permissions permissionResult = await _unitOfWork.GeneralRepository<Permissions>().UpdateAsync(request.Id, permissions);
-
+                Permissions? permissionResult = await _unitOfWork.GeneralRepository<Permissions>().UpdateAsync(request.Id, permissions);
+                if (permissionResult == null)
+                    return null;
+                
                 _unitOfWork.Commit();
 
                 return new PermissionsResultDTO
@@ -45,7 +47,7 @@ namespace N5NowTestBrayanVente.Application.Handlers
                     FechaPermiso = permissions.FechaPermiso,
                 };
             }
-            catch (Exception)
+            catch
             {
                 _unitOfWork.Rollback();
                 return null;

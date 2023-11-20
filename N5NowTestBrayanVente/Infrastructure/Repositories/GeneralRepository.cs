@@ -13,19 +13,19 @@ namespace N5NowTestBrayanVente.Infrastructure.Repositories
             _dbSet = _n5NowTestDBContext.Set<T>();
         }
 
-        public async Task<T> GetAsync(int Id)
+        public async Task<T?> GetAsync(int Id)
         {
             return await _dbSet.FindAsync(Id);
         }
 
-        public async Task<T> InsertAsync(T entity)
+        public async Task<T?> InsertAsync(T entity)
         {
             var entityResult = await _dbSet.AddAsync(entity);
 
             return entityResult.Entity;
         }
 
-        public async Task<T> UpdateAsync(int Id, T entity)
+        public async Task<T?> UpdateAsync(int Id, T entity)
         {
             var findEntity = await _dbSet.FindAsync(Id);
 

@@ -34,7 +34,9 @@ namespace N5NowTestBrayanVente.Application.Handlers
                     FechaPermiso = request.permisionRequestDTO.FechaPermiso,
                 };
 
-                Permissions permissionResult = await _unitOfWork.GeneralRepository<Permissions>().InsertAsync(permissions);              
+                Permissions? permissionResult = await _unitOfWork.GeneralRepository<Permissions>().InsertAsync(permissions);
+                if (permissionResult == null)
+                    return null;
 
                 _unitOfWork.Commit();
 

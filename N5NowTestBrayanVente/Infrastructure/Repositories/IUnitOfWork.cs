@@ -1,6 +1,4 @@
-﻿using N5NowTestBrayanVente.Domain.Aggregates.RepositoriesAggregate.Interfaces;
-
-namespace N5NowTestBrayanVente.Domain.Aggregates.UnitOfWorkAggregate.Interfaces
+﻿namespace N5NowTestBrayanVente.Infrastructure.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {

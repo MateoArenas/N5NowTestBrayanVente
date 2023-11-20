@@ -2,28 +2,44 @@
 using N5NowTestBrayanVente.Application.DTOs;
 using N5NowTestBrayanVente.Application.Queries;
 using N5NowTestBrayanVente.Domain.Aggregates.PermissionsAggregate.Models;
-using N5NowTestBrayanVente.Domain.Aggregates.UnitOfWorkAggregate.Interfaces;
+using N5NowTestBrayanVente.Domain.Enums;
+using N5NowTestBrayanVente.Infrastructure.Remotes;
+using N5NowTestBrayanVente.Infrastructure.Repositories;
 
 namespace N5NowTestBrayanVente.Application.Handlers
 {
     public class GetPermissionsHandler : IRequestHandler<GetPermissionsQuery, PermissionsResultDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public GetPermissionsHandler(IUnitOfWork unitOfWork)
+        private readonly IKafkaProducer _kafkaProducer;
+        public GetPermissionsHandler(IUnitOfWork unitOfWork, IKafkaProducer kafkaProducer)
         {
             _unitOfWork = unitOfWork;
+            _kafkaProducer = kafkaProducer;
         }
         public async Task<PermissionsResultDTO> Handle(GetPermissionsQuery request, CancellationToken cancellationToken)
         {
-            Permissions permission = await _unitOfWork.GeneralRepository<Permissions>().GetAsync(request.Id);
-
-            return new PermissionsResultDTO
+            try
             {
-                NombreEmpleado = permission.NombreEmpleado,
-                ApellidoEmpleado = permission.ApellidoEmpleado,
-                TipoPermiso = permission.PermissionType.Descripcion,
-                FechaPermiso = permission.FechaPermiso,
-            };
+                await _kafkaProducer.ProduceKafkaMessage(KafkaMessageEnum.Get);
+
+                Permissions permission = await _unitOfWork.GeneralRepository<Permissions>().GetAsync(request.Id);
+
+                if (permission == null)
+                    return null;
+
+                return new PermissionsResultDTO
+                {
+                    NombreEmpleado = permission.NombreEmpleado,
+                    ApellidoEmpleado = permission.ApellidoEmpleado,
+                    TipoPermiso = permission.PermissionType.Descripcion,
+                    FechaPermiso = permission.FechaPermiso,
+                };
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

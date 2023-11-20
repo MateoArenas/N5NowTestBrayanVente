@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using N5NowTestBrayanVente.Domain.Aggregates.RepositoriesAggregate.Interfaces;
-using N5NowTestBrayanVente.Domain.Aggregates.UnitOfWorkAggregate.Interfaces;
 using N5NowTestBrayanVente.Infrastructure.Contexts;
 
 namespace N5NowTestBrayanVente.Infrastructure.Repositories

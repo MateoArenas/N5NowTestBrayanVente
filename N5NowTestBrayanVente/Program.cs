@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using N5NowTestBrayanVente.Domain.Aggregates.UnitOfWorkAggregate.Interfaces;
 using N5NowTestBrayanVente.Infrastructure.Contexts;
+using N5NowTestBrayanVente.Infrastructure.Remotes;
 using N5NowTestBrayanVente.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IKafkaProducer, KafkaProducer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 

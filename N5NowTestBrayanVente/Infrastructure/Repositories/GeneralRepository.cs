@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using N5NowTestBrayanVente.Domain.Aggregates.RepositoriesAggregate.Interfaces;
 using N5NowTestBrayanVente.Infrastructure.Contexts;
 
 namespace N5NowTestBrayanVente.Infrastructure.Repositories
@@ -12,11 +11,6 @@ namespace N5NowTestBrayanVente.Infrastructure.Repositories
         {
             _n5NowTestDBContext = n5NowTestDBContext;
             _dbSet = _n5NowTestDBContext.Set<T>();
-        }
-
-        public async Task<List<T>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
         }
 
         public async Task<T> GetAsync(int Id)

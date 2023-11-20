@@ -16,12 +16,6 @@ namespace N5NowTestBrayanVente.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IList<PermissionsResultDTO>> GetAll()
-        {
-            return await _mediator.Send(new GetAllPermissionsQuery());
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<PermissionsResultDTO>> Get(int id)
         {

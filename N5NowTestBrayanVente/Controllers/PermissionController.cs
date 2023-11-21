@@ -31,7 +31,7 @@ namespace N5NowTestBrayanVente.Controllers
             }
 
             _logger.LogInformation("Get Permissions - ejecutado exitosamente");
-            return await _mediator.Send(new GetPermissionsQuery(id));
+            return permission;
         }
 
         [HttpPost]

@@ -8,12 +8,15 @@ namespace N5NowTestBrayanVente.Infrastructure.Remotes
     public class KafkaProducer : IKafkaProducer
     {
         private readonly ProducerConfig _producerConfig;
-        public KafkaProducer()
+        private readonly IConfiguration _configuration;
+        public KafkaProducer(IConfiguration configuration)
         {
+            _configuration = configuration;
             _producerConfig = new ProducerConfig
             {
-                BootstrapServers = "localhost:9092",
+                BootstrapServers = _configuration.GetValue<string>("Kafka:Connection"),
             };
+
         }
 
         public async Task<bool> ProduceKafkaMessage(KafkaMessageEnum kafkaMessageEnum)
@@ -29,7 +32,7 @@ namespace N5NowTestBrayanVente.Infrastructure.Remotes
                         message.NameOperation = "request";
                         break;
                     case KafkaMessageEnum.Modify:
-                        message.NameOperation = "“modify”";
+                        message.NameOperation = "modify";
                         break;
                     case KafkaMessageEnum.Get:
                         message.NameOperation = "get";
@@ -43,7 +46,7 @@ namespace N5NowTestBrayanVente.Infrastructure.Remotes
                     Value = JsonConvert.SerializeObject(message)
                 };
 
-                var deliveryReport = await producer.ProduceAsync("N5NowTest", producedMessage);
+                var deliveryReport = await producer.ProduceAsync(_configuration.GetValue<string>("Kafka:Topic"), producedMessage);
 
                 if (deliveryReport.Status != PersistenceStatus.Persisted)
                     return false;
